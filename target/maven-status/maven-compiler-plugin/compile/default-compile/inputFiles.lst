@@ -1,0 +1,5 @@
+/Users/chris/workspace/notebook/src/main/java/org/rudzki/notebook/NotebookApplication.java
+/Users/chris/workspace/notebook/src/main/java/org/rudzki/notebook/data/NoteDaoImpl.java
+/Users/chris/workspace/notebook/src/main/java/org/rudzki/notebook/data/NoteDao.java
+/Users/chris/workspace/notebook/src/main/java/org/rudzki/notebook/models/Note.java
+/Users/chris/workspace/notebook/src/main/java/org/rudzki/notebook/controllers/ApiController.java
