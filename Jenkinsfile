@@ -13,7 +13,7 @@ pipeline {
       steps {
         git(
             url: 'git@github.com:rudzki/notebook.git',
-            credentialsId: 'd253730b-e019-4a27-ae12-ad62aeadd310',
+            credentialsId: 'fe60c1ff-5919-46f1-9432-5d329c25459e',
             branch: 'master'
         )
       }
