@@ -12,7 +12,7 @@ pipeline {
     stage('git clone') {
       steps {
         git(
-            url: 'https://github.com/rudzki/notebook.git',
+            url: 'ssh://git@github.com:rudzki/notebook.git',
             credentialsId: 'fe60c1ff-5919-46f1-9432-5d329c25459e',
             branch: 'master'
         )
