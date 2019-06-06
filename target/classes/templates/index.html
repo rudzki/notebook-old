@@ -1,0 +1,27 @@
+<html>
+    <head>
+  	  <link rel="stylesheet" type="text/css" href="/style.css" />
+    </head>
+<body>
+
+<h1 class="site-title"><a href="/">Notebook</a></h1>
+<hr />
+
+{{#notes}}
+    <h2 class="note-title">
+        <a href="/notes/{{slug}}/">
+            {{title}}
+        </a>
+    </h2>
+
+    <div class="published">{{published}}</div>
+
+    <p>{{content}}</p>
+
+    <div class="slug">/{{slug}}</div>
+        
+    <hr />
+{{/notes}}
+</body>
+
+</html>

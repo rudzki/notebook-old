@@ -9,9 +9,11 @@ import org.springframework.stereotype.Component;
 public interface NoteDao {
 	
 	public List<Note> getAllNotes();
-	public Note getNote(long id);
+	public Note getNoteById(long id);
 	public Note getNoteBySlug(String slug);
-	public void addNote(Note note);
+	public void saveNote(Note note);
 	public void deleteNote(long id);
-
+	
+	public String getMetaByNoteId(long noteId);
+	public void saveMeta(long noteId, String value);
 }

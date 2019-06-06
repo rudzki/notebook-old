@@ -1,0 +1,32 @@
+<html>
+    <head>
+  	  <link rel="stylesheet" type="text/css" href="/style.css" />
+    </head>
+<body>
+
+<h1><a href="/">Notebook</a></h1>
+<hr />
+
+<h2 class="note-title">
+        <a href="/notes/{{slug}}/">
+            {{note.title}}
+        </a>
+    </h2>
+
+    <div class="published">{{note.published}}</div>
+
+    <p>{{note.content}}</p>
+
+    <div class="slug">/{{note.slug}}</div>
+        	<br />
+        	{{#note.meta}}
+        	
+        	<pre>{{note.meta}}</pre>
+        	<br />
+        
+        	{{/note.meta}}
+    <hr />
+    
+</body>
+
+</html>

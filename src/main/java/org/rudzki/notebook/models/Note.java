@@ -9,6 +9,7 @@ public class Note {
 	private LocalDateTime published;
 	private String title;
 	private String content;
+	private String meta;
 	private List<String> tags;
 	private String slug;
 	
@@ -41,6 +42,12 @@ public class Note {
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	public String getMeta() {
+		return meta;
+	}
+	public void setMeta(String meta) {
+		this.meta = meta;
 	}
 	public List<String> getTags() {
 		return tags;

@@ -4,15 +4,12 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
 import javax.sql.DataSource;
-
 import org.rudzki.notebook.models.Note;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
-
 import com.github.slugify.Slugify;
 
 @Component
@@ -36,9 +33,9 @@ public class NoteDaoImpl implements NoteDao {
 		}
 		return notes;
 	}
-
+	
 	@Override
-	public Note getNote(long id) {
+	public Note getNoteById(long id) {
 		String query = "SELECT * FROM notes WHERE id=" + id;
 		SqlRowSet rowset = jdbcTemplate.queryForRowSet(query);
 		if (rowset.first()) {
@@ -50,7 +47,7 @@ public class NoteDaoImpl implements NoteDao {
 	
 	@Override
 	public Note getNoteBySlug(String slug) {
-		String query = "SELECT * FROM notes WHERE slug=" + slug;
+		String query = "SELECT * FROM notes WHERE slug = '" + slug + "'";
 		SqlRowSet rowset = jdbcTemplate.queryForRowSet(query);
 		if (rowset.first()) {
 			Note note = mapRowToNote(rowset);
@@ -66,8 +63,11 @@ public class NoteDaoImpl implements NoteDao {
 	}
 
 	@Override
-	public void addNote(Note note) {
+	public void saveNote(Note note) {
 		Long id = getNextId();
+		LocalDateTime now = LocalDateTime.now();
+		note.setPublished(now);
+		note.setId(getNextId());
 		String slug = generateSlug(note.getTitle());
 		String query = "INSERT INTO notes(id, published, title, content, tags, slug) VALUES (?,?,?,?,?,?)";
 		jdbcTemplate.update(query, id, note.getPublished(), note.getTitle(), note.getContent(), note.getTags(), slug);
@@ -81,6 +81,22 @@ public class NoteDaoImpl implements NoteDao {
 			return result + "-" + uuid;
 		}
 		return result;
+	}
+	
+	public String getMetaByNoteId(long noteId) {
+		String meta = null;
+		String query = "SELECT meta FROM notes WHERE id=" + noteId;
+		SqlRowSet rowset = jdbcTemplate.queryForRowSet(query);
+		if (rowset.first()) {
+			meta = rowset.getString("meta");
+			return meta;
+		}
+		return null;
+	}
+	
+	public void saveMeta(long noteId, String value) {
+		String query = "UPDATE notes SET meta=? WHERE id=?"; 
+		jdbcTemplate.update(query, value, noteId);
 	}
 
 	private Long getNextId() {
@@ -109,6 +125,9 @@ public class NoteDaoImpl implements NoteDao {
 
 		String content = row.getString("content");
 		note.setContent(content);
+		
+		String meta = row.getString("meta");
+		note.setMeta(meta);
 
 		List<String> tags = new ArrayList<String>();
 		note.setTags(tags);
