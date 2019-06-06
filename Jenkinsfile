@@ -11,7 +11,11 @@ pipeline {
 
     stage('git clone') {
       steps {
-        git clone 'git@github.com:rudzki/notebook.git'
+        git(
+            url: 'git@github.com:rudzki/notebook.git',
+            credentialsId: 'd253730b-e019-4a27-ae12-ad62aeadd310',
+            branch: 'master'
+        )
       }
     }
 
